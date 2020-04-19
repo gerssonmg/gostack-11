@@ -7,6 +7,14 @@ app.get('/projects', (request, response) => {
     'Projeto 1',
     'Projeto 2'
   ]);
+});
+
+app.post('/projects', (request, respose) => {
+  return response.json([
+    'Projeto 1',
+    'Projeto 2',
+    'Projeto 3',
+  ])
 })
 
 app.listen(3333, () => {
