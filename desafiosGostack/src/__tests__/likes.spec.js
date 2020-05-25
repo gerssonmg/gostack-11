@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 
 describe("Likes", () => {
-  xit("should be able to give a like to the repository", async () => {
+  it("should be able to give a like to the repository", async () => {
     const repository = await request(app)
       .post("/repositories")
       .send({
@@ -28,7 +28,7 @@ describe("Likes", () => {
     });
   });
 
-  xit("should not be able to like a repository that does not exist", async () => {
+  it("should not be able to like a repository that does not exist", async () => {
     await request(app)
       .post(`/repositories/123/like`)
       .expect(400);

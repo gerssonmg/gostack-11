@@ -70,9 +70,11 @@ app.delete("/repositories/:id", (request, response) => {
   const { params } = request;
 
   const index = repositories.findIndex(repo => repo.id === params.id);
+
   if (index < 0) {
     return response.status(400).json({ error: STATUS_MESSAGE[400] })
   }
+
   repositories.splice(index, 1);
 
   return response.status(204).json({});
@@ -82,6 +84,11 @@ app.post("/repositories/:id/like", (request, response) => {
   const { params } = request;
 
   const index = repositories.findIndex(repo => repo.id === params.id);
+
+  if (index < 0) {
+    return response.status(400).json({ error: STATUS_MESSAGE[400] })
+  }
+
   repositories[index].likes = repositories[index].likes + 1;
 
   return response.json(repositories[index]);
