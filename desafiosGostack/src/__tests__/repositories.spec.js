@@ -22,7 +22,7 @@ describe("Repositories", () => {
     });
   });
 
-  xit("should be able to list the repositories", async () => {
+  it("should be able to list the repositories", async () => {
     const repository = await request(app)
       .post("/repositories")
       .send({
