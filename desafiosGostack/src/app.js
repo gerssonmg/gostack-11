@@ -9,6 +9,9 @@ app.use(express.json());
 app.use(cors());
 
 const repositories = [];
+const STATUS_MESSAGE = {
+  400: 'repositorie not found'
+}
 
 const middleware = (request, response, next) => {
   console.log(request.route.path);
@@ -57,7 +60,7 @@ app.put("/repositories/:id", (request, response) => {
     return response.json(repositories[index]);
 
   } catch (error) {
-    return response.status(400).json({ error: 'repositorie not found' });
+    return response.status(400).json({ error: STATUS_MESSAGE[400] });
   }
 
 });
@@ -67,7 +70,9 @@ app.delete("/repositories/:id", (request, response) => {
   const { params } = request;
 
   const index = repositories.findIndex(repo => repo.id === params.id);
-
+  if (index < 0) {
+    return response.status(400).json({ error: STATUS_MESSAGE[400] })
+  }
   repositories.splice(index, 1);
 
   return response.status(204).json({});
