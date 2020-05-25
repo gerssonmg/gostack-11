@@ -18,12 +18,10 @@ const middleware = (request, response, next) => {
 };
 
 app.get("/repositories", middleware, (request, response) => {
-  // TODO
   return response.json(repositories);
 });
 
 app.post("/repositories", middleware, (request, response) => {
-  // TODO
   const body = request.body;
   const { title, url, techs } = request.body;
 
@@ -69,7 +67,12 @@ app.delete("/repositories/:id", (request, response) => {
 });
 
 app.post("/repositories/:id/like", (request, response) => {
-  // TODO
+  const { params } = request;
+
+  const index = repositories.findIndex(repo => repo.id === params.id);
+  repositories[index].likes = repositories[index].likes + 1;
+
+  return response.json(repositories[index]);
 });
 
 module.exports = app;
