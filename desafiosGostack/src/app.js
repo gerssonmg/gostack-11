@@ -58,7 +58,14 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+
+  const { params } = request;
+
+  const index = repositories.findIndex(repo => repo.id === params.id);
+
+  repositories.splice(index, 1);
+
+  return response.json(repositories)
 });
 
 app.post("/repositories/:id/like", (request, response) => {
