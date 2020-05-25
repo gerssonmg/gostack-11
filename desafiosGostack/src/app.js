@@ -39,7 +39,22 @@ app.post("/repositories", middleware, (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-  // TODO
+
+  const { params } = request;
+  const body = request.body;
+  const { title, url, techs } = request.body;
+
+  const index = repositories.findIndex(repo => repo.id === params.id);
+
+  const repositorieDataUpdate = {
+    id: repositories[index].id,
+    title, url, techs,
+    likes: repositories[index].likes
+  }
+
+  repositories[index] = repositorieDataUpdate;
+
+  return response.json(repositories[index])
 });
 
 app.delete("/repositories/:id", (request, response) => {
