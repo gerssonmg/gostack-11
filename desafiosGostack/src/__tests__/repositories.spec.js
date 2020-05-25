@@ -96,7 +96,7 @@ describe("Repositories", () => {
     });
   });
 
-  xit("should be able to delete the repository", async () => {
+  it("should be able to delete the repository", async () => {
     const response = await request(app)
       .post("/repositories")
       .send({
