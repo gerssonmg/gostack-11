@@ -72,11 +72,11 @@ describe("Repositories", () => {
     });
   });
 
-  xit("should not be able to update a repository that does not exist", async () => {
+  it("should not be able to update a repository that does not exist", async () => {
     await request(app).put(`/repositories/123`).expect(400);
   });
 
-  xit("should not be able to update repository likes manually", async () => {
+  it("should not be able to update repository likes manually", async () => {
     const repository = await request(app)
       .post("/repositories")
       .send({

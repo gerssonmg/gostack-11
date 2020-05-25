@@ -39,20 +39,27 @@ app.post("/repositories", middleware, (request, response) => {
 app.put("/repositories/:id", (request, response) => {
 
   const { params } = request;
+  console.log(params)
   const body = request.body;
   const { title, url, techs } = request.body;
 
-  const index = repositories.findIndex(repo => repo.id === params.id);
+  try {
+    const index = repositories.findIndex(repo => repo.id === params.id);
 
-  const repositorieDataUpdate = {
-    id: repositories[index].id,
-    title, url, techs,
-    likes: repositories[index].likes
+    const repositorieDataUpdate = {
+      id: repositories[index].id,
+      title, url, techs,
+      likes: repositories[index].likes
+    }
+
+    repositories[index] = repositorieDataUpdate;
+
+    return response.json(repositories[index]);
+
+  } catch (error) {
+    return response.status(400).json({ error: 'repositorie not found' });
   }
 
-  repositories[index] = repositorieDataUpdate;
-
-  return response.json(repositories[index])
 });
 
 app.delete("/repositories/:id", (request, response) => {
