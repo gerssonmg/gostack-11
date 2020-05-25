@@ -28,11 +28,11 @@ app.post("/repositories", middleware, (request, response) => {
   id = uuid();
   likes = 0;
   repositories.push({ id, title, url, techs, likes })
+
+  const index = repositories.findIndex(repo => repo.id === id);
+
   return response.json(
-    {
-      id,
-      amount_repositories: repositories.length
-    }
+    repositories[index]
   );
 });
 
